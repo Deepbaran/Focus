@@ -1,5 +1,7 @@
 # FOCUS
 
+## Check out the Application Here : [Click Here](https://deepbaran.github.io/Focus/)
+
 ### This Web Application will help you focus and organize your work. Never miss important tasks and focus on the important ones.
 
 ### This application is built using:
