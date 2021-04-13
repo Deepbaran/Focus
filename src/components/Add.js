@@ -1,31 +1,32 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import Tasks from './Tasks';
 
 export default class Add extends Component {
-  state = {
-    id: 0,
-    task: '',
-    children: [],
-    presentChildren: []
-  };
+  constructor(props) {
+    super(props);
 
-  // deleteComponent = index => {
-  //   var children = [...this.state.children];
-  //   // var index = children.indexOf(e.target.value);
-  //   if (index !== -1) {
-  //     children.splice(index, 1);
-  //     this.setState({ children: children });
-  //   }
-  // };
+    this.myRef = createRef();
+
+    this.state = {
+      id: 0,
+      task: '',
+      children: []
+    };
+  }
 
   appendChildren = () => {
     this.setState({
       children: [
         ...this.state.children,
-        <Tasks key={this.state.id} task={this.state.task}></Tasks>
+        <Tasks
+          key={this.state.id}
+          id={this.state.id}
+          task={this.state.task}
+        ></Tasks>
       ],
       id: this.state.id + 1
     });
+    this.myRef.current.value = '';
   };
 
   render() {
@@ -39,6 +40,7 @@ export default class Add extends Component {
               onChange={e => {
                 this.setState({ task: e.target.value });
               }}
+              ref={this.myRef}
             ></input>
             <button onClick={this.appendChildren}>Add</button>
           </div>
