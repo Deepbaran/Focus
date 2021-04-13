@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './Tasks.css';
 
 export default class Tasks extends Component {
   constructor(props) {
@@ -33,17 +34,18 @@ export default class Tasks extends Component {
     return (
       this.state.show && (
         <div>
-          <form onSubmit={e => e.preventDefault()} draggable="true">
-            <li style={{ display: 'inline' }} draggable="true">
+          <form onSubmit={e => e.preventDefault()}>
+            <li style={{ display: 'inline' }}>
               <input
                 readOnly={this.state.readOnly}
                 placeholder={this.state.task}
                 onChange={this.editTask}
+                id="taskList"
               ></input>
               <button onClick={this.readOnlyHandle}>
                 {this.state.buttonName}
               </button>
-              <button onClick={this.deleteComponent}>Delete</button>
+              <button onClick={this.deleteComponent}>X</button>
             </li>
           </form>
         </div>
