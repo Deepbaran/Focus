@@ -6,16 +6,19 @@ export default class Add extends Component {
   constructor(props) {
     super(props);
 
+    // Referencing to the input where we are entering the tasks
     this.myRef = createRef();
 
+    // State of the App
     this.state = {
       id: 0,
-      task: '',
       children: []
     };
   }
 
+  // When Add Button is clicked, this will run
   appendChildren = () => {
+    // Only add a new task when the input is not empty
     if (this.myRef.current.value !== '') {
       this.setState({
         children: [
@@ -23,7 +26,7 @@ export default class Add extends Component {
           <Tasks
             key={this.state.id}
             id={this.state.id}
-            task={this.state.task}
+            task={this.myRef.current.value}
           ></Tasks>
         ],
         id: this.state.id + 1,
@@ -42,9 +45,6 @@ export default class Add extends Component {
             <input
               type="text"
               placeholder="Enter Task"
-              onChange={e => {
-                this.setState({ task: e.target.value });
-              }}
               ref={this.myRef}
               id="addField"
             ></input>

@@ -1,9 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import './Tasks.css';
 
 export default class Tasks extends Component {
   constructor(props) {
     super(props);
+
+    // Referencing to the current task
+    this.myRef = createRef();
 
     this.state = {
       task: props.task,
@@ -14,20 +17,19 @@ export default class Tasks extends Component {
     };
   }
 
+  // Helps to edit the tasks
   readOnlyHandle = () => {
     if (this.state.readOnly === true) {
       this.setState({ readOnly: false, buttonName: 'Done' });
     } else {
       this.setState({ readOnly: true, buttonName: 'Edit' });
+      this.setState({ task: this.myRef.current.value });
     }
   };
 
+  // Delete the tasks
   deleteComponent = () => {
     this.setState({ show: false });
-  };
-
-  editTask = e => {
-    this.setState({ task: e.target.value });
   };
 
   render() {
@@ -39,7 +41,7 @@ export default class Tasks extends Component {
               <input
                 readOnly={this.state.readOnly}
                 placeholder={this.state.task}
-                onChange={this.editTask}
+                ref={this.myRef}
                 id="taskList"
               ></input>
               <button onClick={this.readOnlyHandle}>
