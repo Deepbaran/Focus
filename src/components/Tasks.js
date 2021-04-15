@@ -6,7 +6,7 @@ export default class Tasks extends Component {
     super(props);
 
     // Referencing to the current task
-    this.myRef = createRef();
+    this.inputRef = createRef();
 
     this.state = {
       task: props.task,
@@ -23,7 +23,7 @@ export default class Tasks extends Component {
       this.setState({ readOnly: false, buttonName: 'Done' });
     } else {
       this.setState({ readOnly: true, buttonName: 'Edit' });
-      this.setState({ task: this.myRef.current.value });
+      this.setState({ task: this.inputRef.current.value });
     }
   };
 
@@ -32,16 +32,29 @@ export default class Tasks extends Component {
     this.setState({ show: false });
   };
 
+  // Method to cut the text of the tasks that are done
+  onFocus = e => {
+    if (this.state.buttonName === 'Edit') {
+      if (e.target.style.textDecoration !== 'line-through') {
+        e.target.style.textDecoration = 'line-through';
+      } else {
+        e.target.style.textDecoration = 'none';
+      }
+    }
+    e.target.blur();
+  };
+
   render() {
     return (
       this.state.show && (
         <div>
-          <form onSubmit={e => e.preventDefault()}>
+          <form onSubmit={e => e.preventDefault()} id="taskForm">
             <li style={{ display: 'inline' }}>
               <input
                 readOnly={this.state.readOnly}
                 placeholder={this.state.task}
-                ref={this.myRef}
+                onFocus={this.onFocus}
+                ref={this.inputRef}
                 id="taskList"
               ></input>
               <button onClick={this.readOnlyHandle}>

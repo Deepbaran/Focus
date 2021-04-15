@@ -19,6 +19,8 @@
   ![](./FocusTasks.png)
 - If you wish to edit a task, just press the 'Edit' button and edit that task. Once done, Press the 'Done' button.
   ![](./FocusTasksEdit.png)
+- If a task is done, simply click on that task and that task will be crossed out. And if you want to undo it, then simply click on it again.
+  ![](./FocusTasksDone.png)
 - For deleting any task, simply press the 'X' button.(Tasks cannot be recovered, once deleted. So, make sure you want to delete it)
   ![](./FocusTasksDelete.png)
 
